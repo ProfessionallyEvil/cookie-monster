@@ -17,7 +17,7 @@
 		"format": "prettier --write ."
 	},
 	"files": [
-		"dist/cli.js"
+		"dist/**/*"
 	],
 	"dependencies": {
 		"concatifier": "^1.0.2",
