@@ -1,0 +1,31 @@
+[
+  {
+    "castle": true,
+    "official": 724807089,
+    "allow": [
+      [
+        false,
+        {
+          "student": false,
+          "gave": false,
+          "eaten": {
+            "east": "party",
+            "branch": true,
+            "busy": -2072624401.113999,
+            "jar": "ahead"
+          },
+          "bell": false
+        },
+        "lonely",
+        "try"
+      ],
+      -246766264.17511845,
+      true,
+      "go"
+    ],
+    "essential": true
+  },
+  1183917031,
+  -1303906166.2777863,
+  false
+]
