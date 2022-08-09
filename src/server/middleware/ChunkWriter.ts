@@ -1,10 +1,11 @@
 import { writeFile } from "fs/promises";
 import concatifier from "concatifier";
-// const unidecode = require("unidecode");
-import { decode } from "../encoding/yuckify";
+//const unidecode = require("unidecode");
+//import { decode } from "../encoding/yuckify";
 import { Response } from "express";
 import { CookieMonsterPayloadRequest } from "../../types/index";
 import { serverEventEmitter } from "../events/emitter";
+import { readFileSync, writeFileSync } from "fs";
 
 // const underscoreRx = /^\/\//;
 
@@ -24,15 +25,13 @@ export async function ChunkWriter(
 	_: Response,
 	next: Function
 ) {
-	let payload = req.cookies?.session
-		? decode(req.cookies.session, { stripNulls: false, type: "binary" })
-		: "";
+	let payload: string = req.cookies?.session || "";
 	const f = req.filename?.split(/\/\\/g)?.pop() || "file";
 	let writepath = `${tmpDir}/${f}.${req.sequence?.index || "x"}_${
 		req.sequence?.total || "y"
 	}`;
 	console.log(writepath);
-	writeFile(writepath, payload)
+	writeFile(writepath, payload.substring(1))
 		.then((_) => {})
 		.catch((err) => {
 			console.log(err);
@@ -44,15 +43,18 @@ export async function ChunkWriter(
 		for (let filenum = 1; filenum <= nt; filenum++) {
 			fileList.push(`${tmpDir}/${f}.${String(filenum)}_${req.sequence?.total}`);
 		}
-		concatifier(fileList, `${outputDir}/${f}`, { delimiter: "" });
-		console.log(`${f} written to out`);
+		concatifier(fileList, `${outputDir}/${f}`, { delimiter: "" }).then(() => {
+			let fullData = readFileSync(`${outputDir}/${f}`).toString();
+			writeFileSync(`${outputDir}/${f}`, Buffer.from(fullData, "base64"), { encoding: "utf8" });
+			console.log(`${f} written to out`);
+		});
 	}
 	next();
 }
 
-// function bToA(b: string): string {
-// 	return unidecode(Buffer.from(b, "base64").toString("utf8")).replace(
-// 		/\0*/g,
-// 		""
-// 	);
-// }
+//function bToA(b: string): string {
+ //	return unidecode(Buffer.from(b, "base64").toString("utf-8"));//.replace(
+ 	//	/\0*/g,
+ 	//	""
+ 	//);
+ //}
