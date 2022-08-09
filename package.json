@@ -1,8 +1,10 @@
 {
-	"name": "cookie-monster-exfil",
+	"name": "@professionallyevil/cookie-monster-exfil",
 	"version": "2.0.0",
 	"license": "MIT",
-	"bin": "dist/cli.js",
+	"bin": {
+		"cookie-monster": "dist/cli.js"
+	},
 	"engines": {
 		"node": ">=14"
 	},
