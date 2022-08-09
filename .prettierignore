@@ -1,0 +1,8 @@
+# Ignore everything except src
+dist
+.yarn
+feeders
+tmp
+out
+node_modules
+*.json
