@@ -26,3 +26,7 @@ You will also need a feeder, which can be found attached to the [releases](https
 ## Additional Notes
 - The core functionality is working, but there is some functionality that is known to be missing. Skim the patch notes (they're concise) for details.
 - There's no built-in support for using certificated and TLS directly through this app. If using for actual sensitive data, if is *strongly* recommended that you put it behind a reverse proxy that does support HTTPS, and to only use TLS for it.
+
+## License
+Code original to this project is licensed under the MIT license.
+Response content colocated with the source code, in the subdirectories of https://github.com/ProfessionallyEvil/cookie-monster/tree/main/src/responses is sourced from public sources inlcuding apache.org, bulma.io, react.com, and purecss.io. This content retains its original licensing and copyrights.
